@@ -22,7 +22,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 开发背景：</br>
     此页面用于公司项目里，公司的项目用的是php的ci框架，之前未用过vue和webpack</br>
-    
+    </br>
 开发过程：</br>
     在本地服务器www文件夹下创建vue-cli的模板，和公司项目的文件夹（leqeedata）平级</br>
     开发中遇到的问题主要有两个：</br>
