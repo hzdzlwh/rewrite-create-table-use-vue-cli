@@ -75,5 +75,8 @@ https://vuejs-templates.github.io/webpack/proxy.html<br>
                 },<br>
             上面的80端口是本地服务器的默认端口。<br>
          2，ajax请求的url写法如下：<br>
-                url: "/leqeedata/RecordAgent/DiyHeaderRecord/getHeadersByCode"
+                url: "/leqeedata/RecordAgent/DiyHeaderRecord/getHeadersByCode"<br><br><br>
+                
+ #上述代码还存在一个问题，此问题是在上线以后发现的<br>
+      线上打开页面后请求静态资源的路径错，可能是webpack的配置不对，还没有解决
      
