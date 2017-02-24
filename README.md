@@ -38,14 +38,14 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 今天翻看代码时，突然发现vue-cli的config文件里有一个参数叫proxyTable，看这个名字就感觉能解决问题，于是我就去搜了一下，果然。在vuejs-templates，也就是vue-cli的使用的模板插件里，有关于API proxy的说明，使用的就是这个参数。<br>
 https://vuejs-templates.github.io/webpack/proxy.html<br>
 这个参数主要是一个地址映射表，你可以通过设置将复杂的url简化，例如我们要请求的地址是api.xxxxxxxx.com/list/1，可以按照如下设置：<br><br>
-       ~~~proxyTable: {
-        '/list': {
-          target: 'http://api.xxxxxxxx.com',
-          pathRewrite: {
-            '^/list': '/list'
-          }
-        }
-      }~~~<br>
+       proxyTable: {<br>
+        '/list': {<br>
+          target: 'http://api.xxxxxxxx.com',<br>
+          pathRewrite: {<br>
+            '^/list': '/list'<br>
+          }<br>
+        }<br>
+      }<br>
       这样我们在写url的时候，只用写成/list/1就可以代表api.xxxxxxxx.com/list/1.<br><br>
       
     那么又是如何解决跨域问题的呢？其实在上面的'list'的参数里有一个changeOrigin参数，接收一个布尔值，如果设置为true,那么本地会虚拟一个服务端接收你的请求并代你发送该请求，这样就不会有跨域问题了，当然这只适用于开发环境。增加的代码如下所示：<br>
@@ -57,23 +57,23 @@ https://vuejs-templates.github.io/webpack/proxy.html<br>
                   '^/list': '/list'
                 }
               }
-            }<br>
+            }
       vue-cli的这个设置来自于其使用的插件http-proxy-middleware    github：https://github.com/chimurai/http-proxy-middleware  <br><br><br>
       
       下面是我针对上述方案在项目代码里做出的修改：<br>
       
            1，修改config下的index.js文件的proxyTable如下：<br>
-                proxyTable: {
-                    '/leqeedata/RecordAgent/DiyHeaderRecord/getHeadersByCode': {
-                        target: 'http://localhost:80',
-                        changeOrigin: true,
-                        pathRewrite: {
-                            '^/leqeedata/RecordAgent/DiyHeaderRecord/getHeadersByCode':
+                proxyTable: {<br>
+                    '/leqeedata/RecordAgent/DiyHeaderRecord/getHeadersByCode': {<br>
+                        target: 'http://localhost:80',<br>
+                        changeOrigin: true,<br>
+                        pathRewrite: {<br>
+                            '^/leqeedata/RecordAgent/DiyHeaderRecord/getHeadersByCode':<br>
                                         '/leqeedata/RecordAgent/DiyHeaderRecord/getHeadersByCode'
-                        }
-                    }
+                        }<br>
+                    }<br>
                 },<br>
-            上面的80端口是本地服务器的默认端口。
-         2，ajax请求的url写法如下：
+            上面的80端口是本地服务器的默认端口。<br>
+         2，ajax请求的url写法如下：<br>
                 url: "/leqeedata/RecordAgent/DiyHeaderRecord/getHeadersByCode"
      
