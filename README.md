@@ -79,4 +79,34 @@ https://vuejs-templates.github.io/webpack/proxy.html<br>
                 
  #上述代码还存在一个问题，此问题是在上线以后发现的<br>
       线上打开页面后请求静态资源的路径错，可能是webpack的配置不对，还没有解决
-     
+ <br><br><br>
+ /*******************************************************************************/
+ 上面的问题记录写的有不对的地方，作为一个记录学习的过程吧。<br>
+ 经过一段时间学习，上述问题已全部解决，正式打包上线，无论是在开发环境还是生产环境都能正常运行。 <br><br>
+ 详细过程如下：<br> 
+     1， 把vue-cli的模板生成的文件的位置做了改变，之前是放到项目的外面了，现在放到了CI框架的views文件夹下。<br>
+     2, 如果是开发环境，ajax请求的url写法："/leqeedata/RecordAgent/DiyHeaderRecord/getHeadersByCode", 还需要在在index.js中设置代理如下：<br>
+          proxyTable: { <br>
+        '/leqeedata/RecordAgent': {<br>
+            target: 'http://localhost:80',<br>
+            changeOrigin: true,<br>
+            pathRewrite: {<br>
+                '^/leqeedata/RecordAgent': '/leqeedata/RecordAgent'<br>
+            }<br>
+        }<br>
+    },<br>
+    
+    3, 如果是生产环境，ajax请求的url写法：/RecordAgent/DiyHeaderRecord/getHeadersByCode，还需要在index.js中配置如下：<br>
+       在build下设置：assetsPublicPath: '/assets/sdk'(此写法只限php的ci框架，如存放文件的目录有变化，按照变化修改)，执行完<br>
+       npm run build 后，可以在dist下的index.html看到引入静态资源的路径：    
+          href=/assets/sdk/static/css/app.ff2f7a5cd94ace836adc3718c9bc018e.css
+    4， 把生成的dist下的index.html放到ci框架的views下，把static文件夹放到assets下就可以了。
+      
+      
+    
+  
+ 
+ 
+ 
+ 
+ 
