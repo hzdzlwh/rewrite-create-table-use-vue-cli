@@ -58,8 +58,8 @@ export default {
         var tempArr = []
         for(var j=0;j<this.colNums;j++){
           var temp = {};
-          temp.rowspan = 0;
-          temp.colspan = 0;
+          temp.rowspan = 1;
+          temp.colspan = 1;
           tempArr.push(temp);
         }
         res.push(tempArr);
@@ -121,7 +121,7 @@ export default {
             })*/
 
             $.ajax({
-              url: "http://localhost/leqeedata/RecordAgent/DiyHeaderRecord/insertOrUpdateHeaders",
+              url: "/leqeedata/RecordAgent/DiyHeaderRecord/insertOrUpdateHeaders",
               type: "post",
               dataType: "json",
               data: data,
@@ -171,7 +171,7 @@ export default {
 
             })*/
             $.ajax({
-                url: "http://localhost/leqeedata/RecordAgent/DiyHeaderRecord/getHeadersByCode",
+                url: "/leqeedata/RecordAgent/DiyHeaderRecord/getHeadersByCode",
                 type: "post",
                 dataType: "json",
                 data: {
